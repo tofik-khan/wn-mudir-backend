@@ -1,12 +1,23 @@
 require('dotenv').config()
 import cors from "cors";
 import express from "express";
+import { auth } from "express-oauth2-jwt-bearer";
+import { getAdmins } from "./mudir/admins";
 
 const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => res.send("Express on Vercel"));
+const checkJwt = auth({
+  audience: process.env.AUTH0_AUDIENCE,
+  issuerBaseURL: process.env.AUTH0_BASE_URL,
+  tokenSigningAlg: "RS256",
+});
+
+app.get("/", checkJwt, (req, res) => res.send("Express on Vercel"));
+
+// Mudir - Admins
+app.get("/mudir/admins", checkJwt, getAdmins);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
