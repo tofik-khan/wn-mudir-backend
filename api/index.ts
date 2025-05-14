@@ -3,7 +3,9 @@ import cors from "cors";
 import express from "express";
 import { auth } from "express-oauth2-jwt-bearer";
 import {
+  createAdmin,
   getAdmins,
+  updateAdmin,
   updateAdminImage,
   updateAdminLastLogin,
 } from "./mudir/admins";
@@ -22,6 +24,8 @@ app.get("/", checkJwt, (req, res) => res.send("Express on Vercel"));
 
 // Mudir - Admins
 app.get("/mudir/admins", getAdmins);
+app.post("/mudir/admins", checkJwt, createAdmin);
+app.put("/mudir/admins", checkJwt, updateAdmin);
 
 app.put("/mudir/admins/image", updateAdminImage);
 app.put("/mudir/admins/lastlogin", updateAdminLastLogin);
