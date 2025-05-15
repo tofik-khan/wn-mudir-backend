@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 import cors from "cors";
 import express from "express";
 import { auth } from "express-oauth2-jwt-bearer";
@@ -9,6 +9,7 @@ import {
   updateAdminImage,
   updateAdminLastLogin,
 } from "./mudir/admins";
+import { imageKitAuth } from "./mudir/images";
 
 const app = express();
 app.use(express.json());
@@ -29,6 +30,9 @@ app.put("/mudir/admins", checkJwt, updateAdmin);
 
 app.put("/mudir/admins/image", updateAdminImage);
 app.put("/mudir/admins/lastlogin", updateAdminLastLogin);
+
+// Mudir - Images
+app.get("/mudir/images/auth", imageKitAuth);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
