@@ -28,3 +28,24 @@ export const imageKitAuth = (req, res) => {
     res.status(500).send({ status: "error", message: e.message });
   }
 };
+
+export const imageKitGetAssets = (req, res) => {
+  try {
+    imageKit.listFiles(
+      {
+        searchQuery: `path:"${req.query.folder}"`,
+      },
+      (error, result) => {
+        if (error) {
+          console.error(error);
+          res.status(500).send({ status: "error", message: error });
+        } else {
+          res.send({ status: "success", data: result });
+        }
+      }
+    );
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ status: "error", message: error.message });
+  }
+};
