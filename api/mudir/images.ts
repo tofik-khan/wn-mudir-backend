@@ -1,10 +1,5 @@
 require("dotenv").config();
-import { MongoClient } from "mongodb";
 import ImageKit from "imagekit";
-
-const client = new MongoClient(
-  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/`
-);
 
 const imageKit = new ImageKit({
   urlEndpoint: process.env.IMAGEKIT_ENDPOINT,
