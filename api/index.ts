@@ -10,6 +10,7 @@ import {
   updateAdminLastLogin,
 } from "./mudir/admins";
 import { imageKitAuth, imageKitGetAssets } from "./mudir/images";
+import { getProjects } from "./waqfeardhi/projects";
 
 const app = express();
 app.use(express.json());
@@ -34,6 +35,9 @@ app.put("/mudir/admins/lastlogin", updateAdminLastLogin);
 // Mudir - Images
 app.get("/mudir/images/auth", imageKitAuth);
 app.get("/mudir/images", imageKitGetAssets);
+
+// Waqf-e-Ardhi - Projects
+app.get("/waqfeardhi/projects", getProjects);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
