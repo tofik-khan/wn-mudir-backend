@@ -15,6 +15,7 @@ import {
   getProjects,
   updateProject,
 } from "./waqfeardhi/projects";
+import { getApplicants, getOneApplicant } from "./waqfeardhi/applicants";
 
 const app = express();
 app.use(express.json());
@@ -44,6 +45,10 @@ app.get("/mudir/images", imageKitGetAssets);
 app.get("/waqfeardhi/projects", getProjects);
 app.post("/waqfeardhi/projects", checkJwt, createProject);
 app.put("/waqfeardhi/projects", checkJwt, updateProject);
+
+// Waqf-e-Ardhi - Applicants
+app.get("/waqfeardhi/applicants", checkJwt, getApplicants);
+app.get("/waqfeardhi/applicants/:id", checkJwt, getOneApplicant);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
