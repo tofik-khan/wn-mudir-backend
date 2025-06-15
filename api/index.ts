@@ -15,7 +15,11 @@ import {
   getProjects,
   updateProject,
 } from "./waqfeardhi/projects";
-import { getApplicants, getOneApplicant } from "./waqfeardhi/applicants";
+import {
+  createApplicant,
+  getApplicants,
+  getOneApplicant,
+} from "./waqfeardhi/applicants";
 
 const app = express();
 app.use(express.json());
@@ -27,7 +31,7 @@ const checkJwt = auth({
   tokenSigningAlg: "RS256",
 });
 
-app.get("/", checkJwt, (req, res) => res.send("Express on Vercel"));
+app.get("/", (req, res) => res.send("Express on Vercel"));
 
 // Mudir - Admins
 app.get("/mudir/admins", getAdmins);
@@ -49,6 +53,7 @@ app.put("/waqfeardhi/projects", checkJwt, updateProject);
 // Waqf-e-Ardhi - Applicants
 app.get("/waqfeardhi/applicants", checkJwt, getApplicants);
 app.get("/waqfeardhi/applicants/:id", checkJwt, getOneApplicant);
+app.post("/waqfeardhi/applicants", createApplicant);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
