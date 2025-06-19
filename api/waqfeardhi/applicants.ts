@@ -64,3 +64,25 @@ export const createApplicant = async (req, res) => {
     await client.close();
   }
 };
+
+export const udpateApplicantStatus = async (req, res) => {
+  try {
+    await client.connect();
+
+    const { id } = req.params;
+
+    const applicantUpdated = await client
+      .db("waqfeardhi")
+      .collection("applicants")
+      .updateOne(
+        { _id: new ObjectId(id) },
+        { $set: { status: req.body.status } }
+      );
+    res.send({ status: "success", data: applicantUpdated });
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({ status: "error", message: e.message });
+  } finally {
+    await client.close();
+  }
+};

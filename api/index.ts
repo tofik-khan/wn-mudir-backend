@@ -19,6 +19,7 @@ import {
   createApplicant,
   getApplicants,
   getOneApplicant,
+  udpateApplicantStatus,
 } from "./waqfeardhi/applicants";
 
 const app = express();
@@ -54,6 +55,7 @@ app.put("/waqfeardhi/projects", checkJwt, updateProject);
 app.get("/waqfeardhi/applicants", checkJwt, getApplicants);
 app.get("/waqfeardhi/applicants/:id", checkJwt, getOneApplicant);
 app.post("/waqfeardhi/applicants", createApplicant);
+app.put("/waqfeardhi/applicants/:id/status", checkJwt, udpateApplicantStatus);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
