@@ -21,6 +21,11 @@ import {
   getOneApplicant,
   udpateApplicantStatus,
 } from "./waqfeardhi/applicants";
+import {
+  getApplicationCount,
+  getCompletedApplicationsCount,
+  getProjectCount,
+} from "./waqfeardhi/dashboard";
 
 const app = express();
 app.use(express.json());
@@ -56,6 +61,14 @@ app.get("/waqfeardhi/applicants", checkJwt, getApplicants);
 app.get("/waqfeardhi/applicants/:id", checkJwt, getOneApplicant);
 app.post("/waqfeardhi/applicants", createApplicant);
 app.put("/waqfeardhi/applicants/:id/status", checkJwt, udpateApplicantStatus);
+
+// Waqf-e-Ardhi - Dashboard
+app.get("/waqfeardhi/count/applications", getApplicationCount);
+app.get(
+  "/waqfeardhi/count/completedApplications",
+  getCompletedApplicationsCount
+);
+app.get("/waqfeardhi/count/projects", getProjectCount);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
