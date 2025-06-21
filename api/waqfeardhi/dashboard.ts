@@ -78,3 +78,44 @@ export const getApplicationsByAuxiliary = async (req, res) => {
     await client.close();
   }
 };
+
+export const getApplicationsByMonth = async (req, res) => {
+  try {
+    await client.connect();
+
+    const result = await client
+      .db("waqfeardhi")
+      .collection("applicants")
+      .aggregate([
+        {
+          $group: {
+            _id: {
+              $dateToString: {
+                format: "%Y-%m",
+                date: { $toDate: "$timestamp" },
+              },
+            },
+            count: { $sum: 1 },
+          },
+        },
+        {
+          $project: {
+            _id: 0,
+            label: "$_id",
+            value: "$count",
+          },
+        },
+        {
+          $sort: { label: 1 },
+        },
+      ])
+      .toArray();
+
+    res.send({ status: "success", data: result });
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({ status: "error", message: e.message });
+  } finally {
+    await client.close();
+  }
+};
