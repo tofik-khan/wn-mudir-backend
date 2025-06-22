@@ -29,6 +29,7 @@ import {
   getCompletedApplicationsCount,
   getProjectCount,
 } from "./waqfeardhi/dashboard";
+import { imageKitUsage } from "./mudir/dashboard";
 
 const app = express();
 app.use(express.json());
@@ -78,6 +79,9 @@ app.get(
 );
 app.get("/waqfeardhi/count/applicationsPerMonth", getApplicationsByMonth);
 app.get("/waqfeardhi/count/status/:status", getApplicationCountByStatus);
+
+// Global Dashboard
+app.get("/mudir/usage/imagekit", imageKitUsage);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
