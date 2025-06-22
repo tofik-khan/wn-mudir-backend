@@ -119,3 +119,21 @@ export const getApplicationsByMonth = async (req, res) => {
     await client.close();
   }
 };
+
+export const getApplicationCountByStatus = async (req, res) => {
+  try {
+    await client.connect();
+    const { status } = req.params;
+
+    const result = await client
+      .db("waqfeardhi")
+      .collection("applicants")
+      .countDocuments({ status });
+    res.send({ status: "success", data: result });
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({ status: "error", message: e.message });
+  } finally {
+    await client.close();
+  }
+};

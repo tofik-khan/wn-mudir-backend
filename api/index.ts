@@ -23,6 +23,7 @@ import {
 } from "./waqfeardhi/applicants";
 import {
   getApplicationCount,
+  getApplicationCountByStatus,
   getApplicationsByAuxiliary,
   getApplicationsByMonth,
   getCompletedApplicationsCount,
@@ -76,6 +77,7 @@ app.get(
   getApplicationsByAuxiliary
 );
 app.get("/waqfeardhi/count/applicationsPerMonth", getApplicationsByMonth);
+app.get("/waqfeardhi/count/status/:status", getApplicationCountByStatus);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
