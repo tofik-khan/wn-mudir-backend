@@ -29,7 +29,11 @@ import {
   getCompletedApplicationsCount,
   getProjectCount,
 } from "./waqfeardhi/dashboard";
-import { imageKitUsage } from "./mudir/dashboard";
+import {
+  getDigitalOceanStatus,
+  getMongoDbStatus,
+  imageKitUsage,
+} from "./mudir/dashboard";
 
 const app = express();
 app.use(express.json());
@@ -82,6 +86,8 @@ app.get("/waqfeardhi/count/status/:status", getApplicationCountByStatus);
 
 // Global Dashboard
 app.get("/mudir/usage/imagekit", imageKitUsage);
+app.get("/mudir/status/mongodb", getMongoDbStatus);
+app.get("/mudir/status/digitalocean", getDigitalOceanStatus);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
