@@ -72,3 +72,21 @@ export const getDigitalOceanStatus = async (req, res) => {
     res.status(500).send({ status: "error", message: e.message });
   }
 };
+
+export const getDashboardNotifications = async (req, res) => {
+  try {
+    await client.connect();
+
+    const result = await client
+      .db("mudir")
+      .collection("notifications")
+      .find({ published: true })
+      .toArray();
+    res.send({ status: "success", data: result });
+  } catch (e) {
+    console.error(e);
+    res.status(500).send({ status: "error", message: e.message });
+  } finally {
+    await client.close();
+  }
+};

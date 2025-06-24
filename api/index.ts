@@ -30,6 +30,7 @@ import {
   getProjectCount,
 } from "./waqfeardhi/dashboard";
 import {
+  getDashboardNotifications,
   getDigitalOceanStatus,
   getMongoDbStatus,
   imageKitUsage,
@@ -88,6 +89,7 @@ app.get("/waqfeardhi/count/status/:status", getApplicationCountByStatus);
 app.get("/mudir/usage/imagekit", imageKitUsage);
 app.get("/mudir/status/mongodb", getMongoDbStatus);
 app.get("/mudir/status/digitalocean", getDigitalOceanStatus);
+app.get("/mudir/notifications", checkJwt, getDashboardNotifications);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
