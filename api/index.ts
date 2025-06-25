@@ -14,6 +14,7 @@ import {
   createProject,
   getProjects,
   updateProject,
+  updateProjectsSortOrder,
 } from "./waqfeardhi/projects";
 import {
   createApplicant,
@@ -64,6 +65,7 @@ app.get("/mudir/images", imageKitGetAssets);
 app.get("/waqfeardhi/projects", getProjects);
 app.post("/waqfeardhi/projects", checkJwt, createProject);
 app.put("/waqfeardhi/projects", checkJwt, updateProject);
+app.put("/waqfeardhi/projects/sortOrder", checkJwt, updateProjectsSortOrder);
 
 // Waqf-e-Ardhi - Applicants
 app.get("/waqfeardhi/applicants", checkJwt, getApplicants);
