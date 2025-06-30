@@ -11,8 +11,8 @@ const getFAQs = async (req, res: Response) => {
     await client.connect();
 
     const result = await client
-      .db("wn-expo")
-      .collection("faqs")
+      .db("waqfeardhi")
+      .collection("projects")
       .find({})
       .toArray();
     res.send({ status: "success", data: result });
