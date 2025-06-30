@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "node dist/api/index.js"
   },
   "keywords": [],
   "author": "Tofik Khan",
@@ -15,7 +17,8 @@
     "express": "^5.1.0",
     "express-oauth2-jwt-bearer": "^1.6.1",
     "imagekit": "^6.0.0",
-    "mongodb": "^6.16.0"
+    "mongodb": "^6.16.0",
+    "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@types/node": "^22.15.2",
