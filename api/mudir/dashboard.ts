@@ -31,7 +31,7 @@ export const imageKitUsage = async (req, res) => {
 };
 
 const client = new MongoClient(
-  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/`
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CONNECTION}/`,
 );
 
 export const getMongoDbStatus = async (req, res) => {
@@ -57,7 +57,7 @@ export const getMongoDbStatus = async (req, res) => {
 export const getDigitalOceanStatus = async (req, res) => {
   try {
     const response = await fetch(
-      "https://status.digitalocean.com/api/v2/status.json"
+      "https://status.digitalocean.com/api/v2/status.json",
     );
     const data = await response.json();
     res.send({

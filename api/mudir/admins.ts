@@ -4,7 +4,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import { createUpdatePayload } from "../../utils/payload";
 
 const client = new MongoClient(
-  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/`
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CONNECTION}/`,
 );
 
 export const getAdmins = async (req, res) => {
@@ -76,7 +76,7 @@ export const updateAdminImage = async (req, res) => {
       .collection("admins")
       .updateOne(
         { _id: new ObjectId(req.body._id) },
-        { $set: { image: req.body.image } }
+        { $set: { image: req.body.image } },
       );
     res.send({ status: "success", data: adminUpdated });
   } catch (e) {
@@ -96,7 +96,7 @@ export const updateAdminLastLogin = async (req, res) => {
       .collection("admins")
       .updateOne(
         { _id: new ObjectId(req.body._id) },
-        { $set: { lastLogin: dayjs().format() } }
+        { $set: { lastLogin: dayjs().format() } },
       );
     res.send({ status: "success", data: adminUpdated });
   } catch (e) {

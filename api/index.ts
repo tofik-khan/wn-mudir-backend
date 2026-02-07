@@ -77,12 +77,12 @@ app.put("/waqfeardhi/applicants/:id/status", checkJwt, udpateApplicantStatus);
 app.get("/waqfeardhi/count/applications", getApplicationCount);
 app.get(
   "/waqfeardhi/count/completedApplications",
-  getCompletedApplicationsCount
+  getCompletedApplicationsCount,
 );
 app.get("/waqfeardhi/count/projects", getProjectCount);
 app.get(
   "/waqfeardhi/count/applicationsByAuxiliary",
-  getApplicationsByAuxiliary
+  getApplicationsByAuxiliary,
 );
 app.get("/waqfeardhi/count/applicationsPerMonth", getApplicationsByMonth);
 app.get("/waqfeardhi/count/status/:status", getApplicationCountByStatus);
