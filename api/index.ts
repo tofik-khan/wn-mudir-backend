@@ -36,6 +36,12 @@ import {
   getMongoDbStatus,
   imageKitUsage,
 } from "./mudir/dashboard";
+import {
+  createPresenter,
+  getOnePresenter,
+  getPresenters,
+  updatePresenter,
+} from "./expo/presenters";
 
 const app = express();
 app.use(express.json());
@@ -92,6 +98,11 @@ app.get("/mudir/usage/imagekit", imageKitUsage);
 app.get("/mudir/status/mongodb", getMongoDbStatus);
 app.get("/mudir/status/digitalocean", getDigitalOceanStatus);
 app.get("/mudir/notifications", checkJwt, getDashboardNotifications);
+
+app.get("/expo/presenters", getPresenters);
+app.get("/expo/presenters/:id", getOnePresenter);
+app.put("/expo/presenters/:id", checkJwt, updatePresenter);
+app.post("/expo/presenters", checkJwt, createPresenter);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
