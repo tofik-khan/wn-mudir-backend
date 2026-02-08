@@ -4,7 +4,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import { createUpdatePayload } from "../../utils/payload";
 
 const client = new MongoClient(
-  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/`
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CONNECTION}/`,
 );
 
 export const getProjects = async (req, res) => {
@@ -102,10 +102,10 @@ export const updateProjectsSortOrder = async (req, res) => {
         .collection("projects")
         .updateOne(
           { _id: new ObjectId(item._id) },
-          { $set: { sortOrder: item.sortOrder } }
+          { $set: { sortOrder: item.sortOrder } },
         );
       console.log(
-        `Updated project ${item._id} with sortOrder ${item.sortOrder}`
+        `Updated project ${item._id} with sortOrder ${item.sortOrder}`,
       );
     }
     res.send({ status: "success", data: "Done" });

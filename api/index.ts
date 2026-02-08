@@ -36,6 +36,18 @@ import {
   getMongoDbStatus,
   imageKitUsage,
 } from "./mudir/dashboard";
+import {
+  createPresenter,
+  getOnePresenter,
+  getPresenters,
+  updatePresenter,
+} from "./expo/presenters";
+import {
+  createSession,
+  getOneSession,
+  getSessions,
+  updateSession,
+} from "./expo/sessions";
 
 const app = express();
 app.use(express.json());
@@ -77,12 +89,12 @@ app.put("/waqfeardhi/applicants/:id/status", checkJwt, udpateApplicantStatus);
 app.get("/waqfeardhi/count/applications", getApplicationCount);
 app.get(
   "/waqfeardhi/count/completedApplications",
-  getCompletedApplicationsCount
+  getCompletedApplicationsCount,
 );
 app.get("/waqfeardhi/count/projects", getProjectCount);
 app.get(
   "/waqfeardhi/count/applicationsByAuxiliary",
-  getApplicationsByAuxiliary
+  getApplicationsByAuxiliary,
 );
 app.get("/waqfeardhi/count/applicationsPerMonth", getApplicationsByMonth);
 app.get("/waqfeardhi/count/status/:status", getApplicationCountByStatus);
@@ -92,6 +104,18 @@ app.get("/mudir/usage/imagekit", imageKitUsage);
 app.get("/mudir/status/mongodb", getMongoDbStatus);
 app.get("/mudir/status/digitalocean", getDigitalOceanStatus);
 app.get("/mudir/notifications", checkJwt, getDashboardNotifications);
+
+// EXPO - Presenters
+app.get("/expo/presenters", getPresenters);
+app.get("/expo/presenters/:id", getOnePresenter);
+app.put("/expo/presenters/:id", checkJwt, updatePresenter);
+app.post("/expo/presenters", checkJwt, createPresenter);
+
+// EXPO - Sessions
+app.get("/expo/sessions", getSessions);
+app.get("/expo/sessions/:id", getOneSession);
+app.put("/expo/sessions/:id", checkJwt, updateSession);
+app.post("/expo/sessions", checkJwt, createSession);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 

@@ -4,7 +4,7 @@ import { MongoClient, ObjectId } from "mongodb";
 import dayjs from "dayjs";
 
 const client = new MongoClient(
-  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}.mongodb.net/`
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CONNECTION}/`,
 );
 
 export const getApplicants = async (req, res) => {
@@ -76,7 +76,7 @@ export const udpateApplicantStatus = async (req, res) => {
       .collection("applicants")
       .updateOne(
         { _id: new ObjectId(id) },
-        { $set: { status: req.body.status } }
+        { $set: { status: req.body.status } },
       );
     res.send({ status: "success", data: applicantUpdated });
   } catch (e) {
