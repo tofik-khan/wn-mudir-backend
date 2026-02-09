@@ -45,6 +45,7 @@ import {
 import {
   createSession,
   getOneSession,
+  getPublicSessions,
   getSessions,
   updateSession,
 } from "./expo/sessions";
@@ -116,6 +117,9 @@ app.get("/expo/sessions", getSessions);
 app.get("/expo/sessions/:id", getOneSession);
 app.put("/expo/sessions/:id", checkJwt, updateSession);
 app.post("/expo/sessions", checkJwt, createSession);
+
+// EXPO - PUBLIC
+app.get("/expo/public/sessions/:date", getPublicSessions);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
