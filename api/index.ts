@@ -50,6 +50,7 @@ import {
   getSessions,
   updateSession,
 } from "./expo/sessions";
+import { createFAQ, getFAQs, getOneFAQ, updateFAQ } from "./expo/faqs";
 
 const app = express();
 app.use(express.json());
@@ -122,6 +123,12 @@ app.post("/expo/sessions", checkJwt, createSession);
 // EXPO - PUBLIC
 app.get("/expo/public/sessions/:date", getPublicSessions);
 app.get("/expo/public/presenters", getPublicPresenters);
+
+// EXPO - FAQs
+app.get("/expo/faqs", getFAQs);
+app.get("/expo/faqs/:id", getOneFAQ);
+app.put("/expo/faqs/:id", checkJwt, updateFAQ);
+app.post("/expo/faqs", checkJwt, createFAQ);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 
