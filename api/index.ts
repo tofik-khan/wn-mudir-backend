@@ -40,6 +40,7 @@ import {
   createPresenter,
   getOnePresenter,
   getPresenters,
+  getPublicPresenters,
   updatePresenter,
 } from "./expo/presenters";
 import {
@@ -120,6 +121,7 @@ app.post("/expo/sessions", checkJwt, createSession);
 
 // EXPO - PUBLIC
 app.get("/expo/public/sessions/:date", getPublicSessions);
+app.get("/expo/public/presenters", getPublicPresenters);
 
 app.listen(3000, () => console.log("Server ready on port 3000."));
 

@@ -7,6 +7,7 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 
 import { MongoClient, ObjectId } from "mongodb";
+import { getPublicPresentersPipeline } from "../../pipeline/presenters";
 
 const client = new MongoClient(
   `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CONNECTION}/`,
@@ -74,6 +75,22 @@ export const updatePresenter = async (req, res) => {
       .db("expo")
       .collection("presenters")
       .updateOne({ _id: new ObjectId(id) }, { $set: req.body });
+    res.send(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ status: "error", message: error.message });
+  }
+};
+
+export const getPublicPresenters = async (req, res) => {
+  try {
+    await client.connect();
+
+    const result = await client
+      .db("expo")
+      .collection("presenters")
+      .aggregate(getPublicPresentersPipeline())
+      .toArray();
     res.send(result);
   } catch (error) {
     console.error(error);
