@@ -2,6 +2,7 @@ export const getPublicSessionPipeline = (date) => [
   {
     $match: {
       date,
+      isPublished: true,
     },
   },
   {
