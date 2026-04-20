@@ -11,7 +11,14 @@ export const getPublicPresentersPipeline = () => [
         {
           $match: {
             $expr: {
-              $in: ["$$presenterIdStr", "$presenters.value"],
+              $in: [
+                {
+                  $toString: "$$presenterIdStr",
+                },
+                {
+                  $ifNull: ["$presenters.value", []],
+                },
+              ],
             },
           },
         },
